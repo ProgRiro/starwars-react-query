@@ -1,9 +1,18 @@
 {
   "root": true,
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module",
+    "allowImportExportEverywhere": true
+  },
   "extends": [
     "eslint:recommended",
-    "plugin:react/recommend",
-    "plugin:prettier/recommend"
+    "plugin:react/recommended",
+    "plugin:prettier/recommended"
   ],
   "plugins": ["simple-import-sort"],
   "rules": {
@@ -13,24 +22,24 @@
         "usePrettierrc": true
       }
     ],
-    "react/jsx-uses-react": "off",
-    "react/jsx-uses-vars": "error",
+    "react/jsx-uses-react": "warn",
+    "react/jsx-uses-vars": "warn",
     "react/jsx-sort-default-props": [
-      "true",
+      "error",
       {
-        "ignoreCase": "false"
+        "ignoreCase": false
       }
     ],
     "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
     "react/jsx-sort-props": [
-      "true",
+      "error",
       {
-        "callbacksLast": "true",
-        "shorthandFirst": "true",
-        "shorthandLast": "true",
-        "ignoreCase": "false",
-        "noSortAlphabetically": "true",
+        "callbacksLast": true,
+        "shorthandFirst": true,
+        "shorthandLast": true,
+        "ignoreCase": false,
+        "noSortAlphabetically": true,
         "reservedFirst": ["key"]
       }
     ],
@@ -40,9 +49,6 @@
         "component": true,
         "html": true
       }
-    ],
-    "simple-import-sort/sort": "error",
-    "sort-imports": "off",
-    "import/order": "off"
+    ]
   }
 }
