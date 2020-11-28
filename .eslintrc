@@ -1,0 +1,48 @@
+{
+  "root": true,
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommend",
+    "plugin:prettier/recommend"
+  ],
+  "plugins": ["simple-import-sort"],
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "usePrettierrc": true
+      }
+    ],
+    "react/jsx-uses-react": "off",
+    "react/jsx-uses-vars": "error",
+    "react/jsx-sort-default-props": [
+      "true",
+      {
+        "ignoreCase": "false"
+      }
+    ],
+    "react/prop-types": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-sort-props": [
+      "true",
+      {
+        "callbacksLast": "true",
+        "shorthandFirst": "true",
+        "shorthandLast": "true",
+        "ignoreCase": "false",
+        "noSortAlphabetically": "true",
+        "reservedFirst": ["key"]
+      }
+    ],
+    "react/self-closing-comp": [
+      "error",
+      {
+        "component": true,
+        "html": true
+      }
+    ],
+    "simple-import-sort/sort": "error",
+    "sort-imports": "off",
+    "import/order": "off"
+  }
+}
