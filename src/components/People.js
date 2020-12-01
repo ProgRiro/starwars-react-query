@@ -1,15 +1,18 @@
-import React from 'react';
-import { useQuery } from 'react-query';
+import React, { useState } from 'react';
+import { usePaginatedQuery } from 'react-query';
 import Person from './Person';
 
-const fetchPeople = async () => {
-  const res = await fetch('http://swapi.dev/api/people/');
+const fetchPeople = async (key, page) => {
+  const res = await fetch(`http://swapi.dev/api/people/?page=${page}`);
   return res.json();
 };
 
 const People = () => {
-  const { data, status } = useQuery('people', fetchPeople);
-  console.log(data);
+  const [page, setPage] = useState(1);
+  const { resolvedData, latestData, status } = usePaginatedQuery(
+    ['people', page],
+    fetchPeople
+  );
 
   return (
     <div>
@@ -20,11 +23,30 @@ const People = () => {
       {status === 'error' && <div>Error fetching data</div>}
 
       {status === 'success' && (
-        <div>
-          {data.results.map((person) => (
-            <Person key={person.name} person={person} />
-          ))}
-        </div>
+        <>
+          <button
+            disabled={page === 1}
+            onClick={() => setPage((old) => Math.max(old - 1, 1))}
+          >
+            Previous page
+          </button>
+          {page}
+          <button
+            disabled={!latestData || !latestData.next}
+            onClick={() =>
+              setPage((old) =>
+                !latestData || !latestData.next ? old : old + 1
+              )
+            }
+          >
+            Next page
+          </button>
+          <div>
+            {resolvedData.results.map((person) => (
+              <Person key={person.name} person={person} />
+            ))}
+          </div>
+        </>
       )}
     </div>
   );
